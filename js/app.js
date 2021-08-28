@@ -1,16 +1,23 @@
 const loadCountry = () => {
     const inputField = document.getElementById("input-field");
     const getText = inputField.value;
+    console.log(getText);
+
+    if (getText !== '') {
+        const url = `https://coronavirus-19-api.herokuapp.com/countries/${getText}`
+
+        fetch(url)
+            .then(res => res.json())
+            .then(data => showCountry(data))
+            .catch(error => alert('please enter a country'))
+    }
     inputField.value = '';
 
-    const url = `https://coronavirus-19-api.herokuapp.com/countries/${getText}`
 
-    fetch(url)
-        .then(res => res.json())
-        .then(data => showCountry(data))
 }
 
 const showCountry = e => {
+    console.log(e);
     const showItem = document.getElementById("show-item");
     showItem.textContent = '';
     const div = document.createElement('div');
